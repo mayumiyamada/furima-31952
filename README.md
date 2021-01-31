@@ -2,16 +2,16 @@
 
 ## Users テーブル
 
-| Column              | Type   | Options     |
-| ----------------    | ------ | ----------- |
-| nickname            | string | null: false |
-| email               | string | null: false |
-| encrypted_password  | string | null: false |
-| last_name           | string | null: false |
-| first_name          | string | null: false |
-| last_name_kana      | string | null: false |
-| first_name_kana     | string | null: false |
-| birthday            | date   | null: false |
+| Column              | Type   | Options                   |
+| ----------------    | ------ | ------------------------- |
+| nickname            | string | null: false               |
+| email               | string | null: false ,unique: true |
+| encrypted_password  | string | null: false               |
+| last_name           | string | null: false               | 
+| first_name          | string | null: false               |
+| last_name_kana      | string | null: false               |
+| first_name_kana     | string | null: false               |
+| birthday            | date   | null: false               |
 
 ### Association
 
@@ -35,15 +35,15 @@
 
 ## Addresses テーブル
 
-| Column         | Type           |  Options                       |
-| -------------  | -------------- | ------------------------------ |
-| postal_code    | string         | null: false                    | 
-| prefecture     | integer        | null: false                    |
-| city           | string         | null: false                    |
-| address        | string         | null: false                    |
-| building_name  | string         | -------------------------------|
-| phone_number   | string         | null: false                    | 
-| order          | references     | null: false, foreign_key: true |
+| Column            | Type           |  Options                       |
+| ----------------- | -------------- | ------------------------------ |
+| postal_code       | string         | null: false                    | 
+| prefecture_id     | integer        | null: false                    |
+| city              | string         | null: false                    |
+| address           | string         | null: false                    |
+| building_name     | string         | -------------------------------|
+| phone_number      | string         | null: false                    | 
+| order             | references     | null: false, foreign_key: true |
 
 
 
@@ -53,17 +53,17 @@
 
 ## Items テーブル
 
-| Column               | Type          | Options                        |
-| ------------------   | ------------- | ---------------------------    |
-| name                 | string        | null: false                    |
-| info                 | text          | null: false                    |
-| price                | integer       | null: false                    |
-| category             | integer       | null: false                    |
-| sale_status          | integer       | null: false                    |
-| shopping_fee_status  | integer       | null: false                    | 
-| prefecture           | integer       | null: false                    |    
-| scheduled_delivery   | integer       | null: false                    |
-| user                 | references    | null: false, foreign_key: true |
+| Column                   | Type          | Options                        |
+| -----------------------  | ------------- | ---------------------------    |
+| name                     | string        | null: false                    |
+| info                     | text          | null: false                    |
+| price                    | integer       | null: false                    |
+| category_id              | integer       | null: false                    |
+| sales_status_id          | integer       | null: false                    |
+| shopping_fee_status_id   | integer       | null: false                    | 
+| prefecture_id            | integer       | null: false                    |    
+| scheduled_delivery_id    | integer       | null: false                    |
+| user                     | references    | null: false, foreign_key: true |
 
 
 ### Association
