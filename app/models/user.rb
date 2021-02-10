@@ -11,9 +11,9 @@ class User < ApplicationRecord
   validates :first_name_kana, presence: true, format:{with: /\A[ァ-ヶー－]+\z/, message: 'Full-width katakana characters'}    
   validates :birthday, presence: true
  
-  validates :password,presence: true, format:{with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]\z/,message: 'Include both letters and numbers'}
-  validates :email, uniqueness: { message: 'has already been taken'}
-  validates :email, presence: true
-  
+  validates :password, presence: true, length:{minimum:6},
+             format:{with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\z/,message: 'Include both letters and numbers'}
+  validates :email, uniqueness: { case_sensitive: false }
+
 
 end
