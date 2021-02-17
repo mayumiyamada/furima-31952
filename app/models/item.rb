@@ -4,11 +4,11 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  belongs_to :category, optional: true
-  belongs_to :sales_status, optional: true
-  belongs_to :shopping_fee_status, optional: true
-  belongs_to :prefecture, optional: true
-  belongs_to :scheduled_delivery, optional: true
+  belongs_to :category
+  belongs_to :sales_status
+  belongs_to :shopping_fee_status
+  belongs_to :prefecture
+  belongs_to :scheduled_delivery
 
   validates :category_id, numericality: { other_than: 1, message: 'Select' }
   validates :sales_status_id, numericality: { other_than: 0, message: 'Select' }
