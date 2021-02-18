@@ -9,12 +9,7 @@ class Item < ApplicationRecord
   belongs_to :shopping_fee_status
   belongs_to :prefecture
   belongs_to :scheduled_delivery
-
-  validates :category_id, numericality: { other_than: 1, message: 'Select' }
-  validates :sales_status_id, numericality: { other_than: 0, message: 'Select' }
-  validates :shopping_fee_status_id, numericality: { other_than: 0, message: 'Select' }
-  validates :prefecture_id, numericality: { other_than: 0, message: 'Select' }
-  validates :scheduled_delivery_id, numericality: { other_than: 0, message: 'Select' }
+     
 
   with_options presence: true do
     validates :image
@@ -23,4 +18,16 @@ class Item < ApplicationRecord
     validates :price, format: { with: /\A[0-9]+\z/, message: 'Half-width number' },
                       numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
   end
-end
+    
+
+     with_options presence: true, numericality: { other_than: 0, message: 'Select'}  do
+      validates :sales_status_id
+      validates :shopping_fee_status_id
+      validates :prefecture_id
+      validates :scheduled_delivery_id
+     end 
+
+     validates :category_id, presence: true, numericality: { other_than: 1, message: 'Select' }           
+
+  end
+
