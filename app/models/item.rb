@@ -27,7 +27,7 @@ class Item < ApplicationRecord
       validates :scheduled_delivery_id
      end 
 
-     validates :category_id, presence: true, numericality: { other_than: 1, message: 'Select' }           
+     validates :category_id, presence: true, numericality: { other_than: 1, message: 'Select' } 
 
   end
 

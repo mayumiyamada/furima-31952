@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('app/assets/images/bora-bora.png')
+    @item.image = fixture_file_upload('./app/assets/images/bora-bora.png')
   end
 
   describe '商品出品機能' do
@@ -16,14 +16,24 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
 
-      it '価格の範囲が、¥300~¥9,999,999の間であれば出品できる' do
+      it '価格の範囲が、¥300以上であれば出品できる' do
         @item.price = 300
+        expect(@item).to be_valid
+      end
+
+      it '価格の範囲が、¥9,999,999以下であれば出品できる' do
         @item.price = 9999999
         expect(@item).to be_valid
       end
     end
 
     context '商品出品できないとき' do
+      it '画像がないと出品できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
       it '商品名が空だと出品できない' do
         @item.name = ''
         @item.valid?
