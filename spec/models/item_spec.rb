@@ -22,7 +22,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格の範囲が、¥9,999,999以下であれば出品できる' do
-        @item.price = 9999999
+        @item.price = 9_999_999
         expect(@item).to be_valid
       end
     end
@@ -70,7 +70,6 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Sales status Select')
       end
 
-
       it '配送料の負担の選択が空だと保存できない' do
         @item.shopping_fee_status_id = ''
         @item.valid?
@@ -89,13 +88,11 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Prefecture Select')
       end
 
-
       it '発送元の地域の選択が0だと保存できない' do
         @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture Select')
       end
-
 
       it '発送までの日数の選択が空だと保存できない' do
         @item.scheduled_delivery_id = ''
@@ -124,16 +121,14 @@ RSpec.describe Item, type: :model do
       it '299円以下では保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
-  
+
       it '10000000円以上では保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
-
-
     end
   end
 end
