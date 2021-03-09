@@ -13,7 +13,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save
+    if @item.valid?
+       @item.save
       redirect_to action: :index
     else
       render :new
