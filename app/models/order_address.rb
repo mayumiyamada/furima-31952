@@ -5,6 +5,8 @@ class OrderAddress
 
 with_options presence: true do
   validates :token
+  validates :item_id
+  validates :user_id
   validates :city	
   validates :address
   validates :phone_number
@@ -12,7 +14,7 @@ with_options presence: true do
 end
   
   validates :prefecture_id, presence: true, numericality: { other_than: 0, message: "Select" }
-  validates :phone_number, format: { with: /\A0\d{,11}$\z/, message: "No hyphen(-)& less than 11"}
+  validates :phone_number, format: { with: /\A0\d{,11}$\z/, message: "No hyphen(-)& less than 11 & only numbers"}
 
 
 def save

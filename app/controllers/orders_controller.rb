@@ -2,16 +2,15 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index, only: [:index, :create]
   before_action :move_to_toppage, only: [:index, :create] 
+  before_action :set_order, only: [:index, :create]
 
   def index
-  @item = Item.find(params[:item_id])
   @order_address = OrderAddress.new
   end
 
   def create
     @order_address = OrderAddress.new(address_params)
-    @item = Item.find(params[:item_id])
-   if @order_address.valid?
+    if @order_address.valid?
     pay_item
     @order_address.save
     redirect_to root_path
@@ -41,6 +40,10 @@ class OrdersController < ApplicationController
   def move_to_toppage
     @item = Item.find(params[:item_id])
     redirect_to root_path unless @item.order == nil
+  end
+
+  def set_order
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
