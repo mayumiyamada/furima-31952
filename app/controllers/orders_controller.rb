@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
 
   def move_to_toppage
     @item = Item.find(params[:item_id])
-    redirect_to root_path unless current_user.id == @item.order
+    redirect_to root_path unless @item.order == nil
   end
 
   def pay_item
