@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
      before do
-      @order_address = FactoryBot.build(:order_address)    
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @order_address = FactoryBot.build(:order_address, user_id: user_id, item_id: item_id ) 
+      sleep 0.1
     end
 
   describe '商品購入住所の保存' do 
@@ -31,6 +34,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address).to be_valid
       end
     end
+
     context '保存できないとき' do
       it 'postal_codeが空だと保存できないこと' do
         @order_address.postal_code = ''
