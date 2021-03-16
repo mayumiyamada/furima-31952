@@ -28,9 +28,8 @@ class OrdersController < ApplicationController
       :prefecture_id,
       :postal_code,
       :building_name,
-      :phone_number
-    )
-          .merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+      :phone_number )
+      .merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def move_to_index
