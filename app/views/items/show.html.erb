@@ -29,16 +29,16 @@
           <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
           <%= link_to "削除", item_path(@item.id) , method: :delete, class:"item-destroy" %>
-      <% elsif @item.order.blank? %>
+      <% else %>
           <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
-      <% end %>
+       <% end %>
      <% end %>
 
     <div class="item-explain-box">
       <span><%= @item.info %></span>
     </div>
     <table class="detail-table">
-      <tbody>
+     <tbody>
         <tr>
           <th class="detail-item">出品者</th>
           <td class="detail-value"><%= @item.user.nickname %></td>
