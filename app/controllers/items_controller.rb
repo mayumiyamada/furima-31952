@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index,  only: [:edit, :update, :destroy]
+  before_action :move_to_toppage, only: [:edit, :destroy]
 
   def index
     @items = Item.order('created_at DESC')
@@ -13,8 +14,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.valid?
-       @item.save
+    if @item.save
       redirect_to action: :index
     else
       render :new
@@ -53,5 +53,9 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to action: :index unless current_user.id == @item.user_id
+  end
+
+  def move_to_toppage
+    redirect_to root_path unless @item.order.nil?
   end
 end
